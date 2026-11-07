@@ -1,0 +1,53 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Home - DTI CoursePortal{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="p-4 p-md-5 mb-4 rounded-4 shadow-sm text-white"
+     style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #38bdf8 100%);">
+    <div class="container-fluid py-3">
+        <span class="badge bg-light text-primary mb-3 px-3 py-2">IT Department</span>
+        <h1 class="display-5 fw-bold">Welcome to DTI CoursePortal</h1>
+        <p class="col-md-9 fs-5 mt-3 mb-4" style="opacity: 0.9;">
+            Explore IT undergraduate courses, review course syllabus details, and submit inquiry questions directly to course instructors.
+        </p>
+        <a href="{% url 'catalog:course_list' %}" class="btn btn-light btn-lg text-primary fw-semibold me-2">Browse Courses</a>
+        <a href="{% url 'catalog:inquiry' %}" class="btn btn-outline-light btn-lg">Ask a Question</a>
+    </div>
+</div>
+
+<!-- Metrics and Featured Course -->
+<div class="row g-4">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm h-100 text-center">
+            <div class="card-body d-flex flex-column justify-content-center py-5">
+                <h2 class="display-1 fw-bold text-primary mb-0">{{ total_courses }}</h2>
+                <p class="text-muted fw-semibold fs-5 mb-3">Active Courses Offered</p>
+                <div>
+                    <a href="{% url 'catalog:course_list' %}" class="btn btn-outline-primary px-4">Browse All Courses</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-center p-4 p-md-5">
+                <div>
+                    <span class="badge bg-success px-3 py-2 mb-3">⭐ Featured Subject</span>
+                </div>
+                <h4 class="card-title fw-bold text-dark">{{ featured_course.code }}: {{ featured_course.title }}</h4>
+                <p class="card-text text-muted mt-2">{{ featured_course.description }}</p>
+                <div class="d-flex flex-wrap gap-3 text-secondary small mb-3">
+                    <span>📘 {{ featured_course.credits }} Credits</span>
+                    <span>👨‍🏫 {{ featured_course.instructor }}</span>
+                </div>
+                <div>
+                    <a href="{% url 'catalog:course_detail' featured_course.id %}" class="btn btn-success px-4">View Full Syllabus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
